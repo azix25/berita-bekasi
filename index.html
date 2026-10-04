@@ -22,6 +22,24 @@
 
 <!-- 2. Skrip JavaScript untuk Memaksa Play Musik & Getar Otomatis setelah Jeda 10 Detik -->
 <script>
+
+window.addEventListener('click', function() {
+    const audio = document.getElementById('bgMusic');
+    
+    // 1. Putar musik saat ada klik pertama di layar
+    if (audio.paused) {
+      audio.play().catch(error => console.log("Autoplay musik diblokir browser"));
+    }
+    
+    // 2. Langsung getarkan HP saat itu juga (Tanpa setTimeout)
+    if (navigator.vibrate) {
+        // Pola getar keras: Getar 500ms, Diam 200ms, Getar lagi 500ms
+        navigator.vibrate([500, 200, 500]); 
+        console.log("Perintah getar berhasil dikirim!");
+    }
+
+  }, { once: true });
+    
   window.addEventListener('click', function() {
     const audio = document.getElementById('bgMusic');
     
