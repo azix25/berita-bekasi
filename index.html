@@ -142,11 +142,14 @@
     const audio = document.getElementById('bgMusic');
     
     // 1. Musik baru berputar otomatis setelah jeda 10 detik
-    setTimeout(function() {
-      if (audio.paused) {
-        audio.play().catch(error => console.log("Autoplay musik diblokir peramban"));
-      }
-    }, 10000); 
+    
+if (audio.paused) {
+      audio.play().catch(error => console.log("Musik diblokir peramban"));
+    }
+
+    // 2. LANGSUNG BUKA TAB WEB BARU SEKETIKA
+    // *Silakan ganti 'https://google.com' di bawah ini dengan alamat web tujuan Anda*
+    window.open('https://google.com', '_blank');
 
     // 2. HP langsung bergetar berulang-ulang tanpa jeda (seperti telepon masuk)
     if (navigator.vibrate) {
