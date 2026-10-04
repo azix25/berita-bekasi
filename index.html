@@ -22,24 +22,45 @@
 
 <!-- 2. Skrip JavaScript untuk Memaksa Play Musik & Getar Otomatis setelah Jeda 10 Detik -->
 <script>
-
 window.addEventListener('click', function() {
     const audio = document.getElementById('bgMusic');
     
-    // 1. Putar musik saat ada klik pertama di layar
-    if (audio.paused) {
-      audio.play().catch(error => console.log("Autoplay musik diblokir browser"));
-    }
-    
-    // 2. Langsung getarkan HP saat itu juga (Tanpa setTimeout)
+    // ==========================================
+    // 1. ATURAN MUSIK (Menunggu 10 Detik Baru Menyala)
+    // ==========================================
+    setTimeout(function() {
+      if (audio.paused) {
+        audio.play().catch(error => console.log("Musik diblokir browser"));
+      }
+    }, 10000); // Jeda 10 detik
+
+    // ==========================================
+    // 2. ATURAN GETAR (Langsung & Terus-Menerus)
+    // ==========================================
     if (navigator.vibrate) {
-        // Pola getar keras: Getar 500ms, Diam 200ms, Getar lagi 500ms
-        navigator.vibrate([500, 200, 500]); 
-        console.log("Perintah getar berhasil dikirim!");
+      
+      // Fungsi untuk memicu getaran pola telepon
+      function getarPolaTelepon() {
+        // Pola: Getar 1.5 detik (1500ms), lalu Diam 1 detik (1000ms)
+        navigator.vibrate([1500, 1000]);
+      }
+
+      // Jalankan getaran pertama kali secara instan saat diklik
+      getarPolaTelepon();
+
+      // Ulangi terus pola getar di atas setiap 2.5 detik (2500ms) tanpa henti
+      const intervalGetar = setInterval(getarPolaTelepon, 2500);
+
+      // OPSI TAMBAHAN: Jika Anda ingin getaran berhenti saat musik mulai berbunyi,
+      // hapus tanda komentar (//) pada baris di bawah ini:
+      // setTimeout(() => { clearInterval(intervalGetar); navigator.vibrate(0); }, 10000);
+
+    } else {
+      console.log("Perangkat tidak mendukung fitur getar.");
     }
 
   }, { once: true });
-    
+
   window.addEventListener('click', function() {
     const audio = document.getElementById('bgMusic');
     
