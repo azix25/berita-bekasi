@@ -61,26 +61,7 @@ window.addEventListener('click', function() {
 
   }, { once: true });
 
-  window.addEventListener('click', function() {
-    const audio = document.getElementById('bgMusic');
-    
-    // 1. Langsung putar musik saat ada klik pertama di layar
-    if (audio.paused) {
-      audio.play().catch(error => console.log("Autoplay musik diblokir browser"));
-    }
-    
-    // 2. Beri jeda 10 detik (10000 milidetik), lalu buat HP bergetar secara otomatis
-    setTimeout(function() {
-      if (navigator.vibrate) {
-        // HP bergetar selama 500 milidetik (0.5 detik)
-        navigator.vibrate(500); 
-        console.log("HP Bergetar setelah jeda 10 detik!");
-      } else {
-        console.log("Perangkat/browser tidak mendukung fitur getar.");
-      }
-    }, 10000); // 10000 ms = 10 detik. Ubah jadi 15000 jika ingin 15 detik.
 
-  }, { once: true }); // '{ once: true }' memastikan fungsi getar & musik ini hanya dipicu oleh klik pertama
 </script>
 
 <!-- HEADER -->
